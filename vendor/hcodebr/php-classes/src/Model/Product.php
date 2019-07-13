@@ -84,6 +84,7 @@ class Product extends Model {
 			"resource" . DIRECTORY_SEPARATOR . 
 			"upload" . DIRECTORY_SEPARATOR .
 			"products" . DIRECTORY_SEPARATOR .
+			"img" . DIRECTORY_SEPARATOR .
 			$this->getidproduct() . ".jpg"
 			)) {
 
@@ -91,7 +92,7 @@ class Product extends Model {
 
 		} else {
 
-			$url = "/resource/upload/product.jpg";
+			$url = "/resource/templates/store/img/product.jpg";
 
 		}
 
@@ -117,17 +118,17 @@ class Product extends Model {
 		$extension = end($extension);
 
 		switch ($extension) {
-			case 'jpg':
-			case 'jpeg':
-			$image = imagecreatefromjpeg($file['tmp_name']);
+			case "jpg":
+			case "jpeg":
+			$image = imagecreatefromjpeg($file["tmp_name"]);
 			break;
 			
-			case 'gif':
-			$image = imagecreatefromgif($file['tmp_name']);
+			case "gif":
+			$image = imagecreatefromgif($file["tmp_name"]);
 			break;
 
-			case 'png':
-			$image = imagecreatefrompng($file['tmp_name']);	
+			case "png":
+			$image = imagecreatefrompng($file["tmp_name"]);	
 			break;
 
 		}
@@ -136,7 +137,8 @@ class Product extends Model {
 			"resource" . DIRECTORY_SEPARATOR . 
 			"upload" . DIRECTORY_SEPARATOR .
 			"products" . DIRECTORY_SEPARATOR .
-			$this->getidproduct() . "jpg";
+			"img" . DIRECTORY_SEPARATOR .
+			$this->getidproduct() . ".jpg";
 
 		imagejpeg($image, $dist);
 

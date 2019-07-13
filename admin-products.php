@@ -79,7 +79,7 @@ $app->post("/admin/products/:idproduct", function($idproduct){
 	exit;
 
 });
-/*
+
 $app->get("/admin/products/:idproduct/delete", function($idproduct){
 
 	User::verifyLogin();
@@ -94,4 +94,3 @@ $app->get("/admin/products/:idproduct/delete", function($idproduct){
 	exit;
 
 });
-*/
