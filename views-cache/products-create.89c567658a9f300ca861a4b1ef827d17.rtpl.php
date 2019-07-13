@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -54,15 +54,8 @@
               <input type="number" class="form-control" id="vlweight" name="vlweight" step="0.01" placeholder="0.00">
             </div>
             <div class="form-group">
-              <label for="file">Imagem Principal:</label>
-              <div class="box box-widget">
-                <input type="file" class="form-control" id="file" name="file" value="{$product.vlweight}">
-                <div class="box box-widget">
-                  <div class="box-body">
-                    <img class="img-responsive" id="image-preview" src="{$product.desphoto}" alt="Photo">
-                  </div>
-                </div>
-              </div>
+                 <label for="file">Foto Principal</label>
+                 <input type="file" class="form-control" id="file" name="file">            
             </div>
           <!-- /.box-body -->
           <div class="box-footer">

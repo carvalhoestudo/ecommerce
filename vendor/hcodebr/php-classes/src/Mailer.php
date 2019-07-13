@@ -7,7 +7,9 @@ class Mailer {
 	const USERNAME = "seuemail@email.com";
 	const PASSWORD = "<suasenha>";
 	const NAME_FROM = "Loja Ecommerce";
+
 	private $mail;
+
 	public function __construct($toAddress, $toName, $subject, $tplName, $data = array())
 	{
 		$config = array(
@@ -15,11 +17,15 @@ class Mailer {
 			"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
 			"debug"         => false
 	    );
+
 		Tpl::configure( $config );
 		$tpl = new Tpl;
+
 		foreach ($data as $key => $value) {
 			$tpl->assign($key, $value);
+
 		}
+
 		$html = $tpl->draw($tplName, true);
 
 		$this->mail = new \PHPMailer;
@@ -35,7 +41,7 @@ class Mailer {
 		    $this->mail->Password   = Mailer::PASSWORD;          // Senha SMTP
 		    $this->mail->SMTPSecure = 'tls';                     // Ativar criptografia TLS, `ssl` também aceita
 		    $this->mail->Port       = 587;                       // Porta TCP para conectar
-		    		$this->mail->SMTPOptions = array(
+		    $this->mail->SMTPOptions = array(
 
 			'ssl' => array(
 			    'verify_peer' => false,
@@ -75,7 +81,6 @@ class Mailer {
 	{
 		return $this->mail->send();
 	}
-
 	
 }
 

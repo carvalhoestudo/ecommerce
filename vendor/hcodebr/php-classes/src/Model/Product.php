@@ -82,18 +82,16 @@ class Product extends Model {
 		if (file_exists(
 			$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
 			"resource" . DIRECTORY_SEPARATOR . 
-			"templates" . DIRECTORY_SEPARATOR .
-			"store" . DIRECTORY_SEPARATOR .
-			"img" . DIRECTORY_SEPARATOR .
+			"upload" . DIRECTORY_SEPARATOR .
 			"products" . DIRECTORY_SEPARATOR .
 			$this->getidproduct() . ".jpg"
 			)) {
 
-			$url = "/resource/templates/store/img/products" . $this->getidproduct() . ".jpg";
+			$url = "/resource/upload/products" . $this->getidproduct() . ".jpg";
 
 		} else {
 
-			$url = "/resource/templates/store/img/product.jpg";
+			$url = "/resource/upload/product.jpg";
 
 		}
 
@@ -136,9 +134,7 @@ class Product extends Model {
 
 		$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
 			"resource" . DIRECTORY_SEPARATOR . 
-			"templates" . DIRECTORY_SEPARATOR .
-			"store" . DIRECTORY_SEPARATOR .
-			"img" . DIRECTORY_SEPARATOR .
+			"upload" . DIRECTORY_SEPARATOR .
 			"products" . DIRECTORY_SEPARATOR .
 			$this->getidproduct() . "jpg";
 

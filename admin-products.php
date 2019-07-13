@@ -36,7 +36,7 @@ $app->post("/admin/products/create", function(){
 
 	$product->setData($_POST);
 
-	$product->get((int)$idproduct);
+	//$product->get((int)$idproduct);
 
 	$product->save();
 
@@ -79,7 +79,7 @@ $app->post("/admin/products/:idproduct", function($idproduct){
 	exit;
 
 });
-
+/*
 $app->get("/admin/products/:idproduct/delete", function($idproduct){
 
 	User::verifyLogin();
@@ -94,3 +94,4 @@ $app->get("/admin/products/:idproduct/delete", function($idproduct){
 	exit;
 
 });
+*/
