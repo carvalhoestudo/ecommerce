@@ -88,7 +88,7 @@ class Product extends Model {
 			$this->getidproduct() . ".jpg"
 			)) {
 
-			$url = "/resource/upload/products" . $this->getidproduct() . ".jpg";
+			$url = "/resource/upload/products/img/" . $this->getidproduct() . ".jpg";
 
 		} else {
 
