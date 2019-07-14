@@ -5,12 +5,12 @@ use \Hcode\Model\Product;
 
 $app->get('/', function() {
 
-	$products = product::listAll();
+	$products = Product::listAll();
     
 	$page = new Page();
 
 	$page->setTpl("index", [
-		"products"=>Product::checkList($products)
+		'products'=>Product::checkList($products)
 	]);
 
 });
