@@ -122,15 +122,14 @@ class Product extends Model {
 			case "jpeg":
 			$image = imagecreatefromjpeg($file["tmp_name"]);
 			break;
-			
+
 			case "gif":
 			$image = imagecreatefromgif($file["tmp_name"]);
 			break;
 
 			case "png":
-			$image = imagecreatefrompng($file["tmp_name"]);	
+			$image = imagecreatefrompng($file["tmp_name"]);
 			break;
-
 		}
 
 		$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
@@ -146,6 +145,31 @@ class Product extends Model {
 
 		$this->checkPhoto();
 
+	}
+
+	public function getFromURL($desurl)
+	{
+
+		$sql = new Sql();
+
+		$rows = $sql->select("SELECT * FROM tb_products WHERE desurl = :desurl LIMIT 1", [
+			':desurl'=>$desurl
+		]);
+
+		$this->setData($rows[0]);
+	}
+
+	public function getCategories()
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("
+			SELECT * FROM tb_categories a INNER JOIN tb_categoriesproducts b ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
+			", [
+
+				':idcategory'=>$this->getidproduct()
+			]);
 	}
 
 }
