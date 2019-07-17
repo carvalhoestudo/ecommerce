@@ -166,9 +166,14 @@ class Product extends Model {
 			SELECT * FROM tb_categories a INNER JOIN tb_categoriesproducts b ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
 			", [
 
+<<<<<<< HEAD
 				':idproduct'=>$this->getidproduct()
 			]);
 		
+=======
+				':idcategory'=>$this->getidproduct()
+			]);
+>>>>>>> 667deb804ded642634f2a9eba91a649e858a3300
 	}
 
 }
