@@ -36,7 +36,7 @@ $app->post("/admin/products/create", function(){
 
 	$product->setData($_POST);
 
-	//$product->get((int)$idproduct);
+	$product->get((int)$idproduct);
 
 	$product->save();
 
@@ -72,7 +72,7 @@ $app->post("/admin/products/:idproduct", function($idproduct){
 	$product->setData($_POST);
 
 	$product->save();
-
+	//Fazer upload de fotos do produtos
 	$product->setPhoto($_FILES["file"]);
 
 	header("Location: /admin/products");

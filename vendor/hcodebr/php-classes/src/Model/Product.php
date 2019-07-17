@@ -82,17 +82,16 @@ class Product extends Model {
 		if (file_exists(
 			$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
 			"resource" . DIRECTORY_SEPARATOR . 
-			"upload" . DIRECTORY_SEPARATOR .
-			"products" . DIRECTORY_SEPARATOR .
 			"img" . DIRECTORY_SEPARATOR .
+			"products" . DIRECTORY_SEPARATOR .
 			$this->getidproduct() . ".jpg"
 			)) {
 
-			$url = "/resource/upload/products/img/" . $this->getidproduct() . ".jpg";
+			$url = "/resource/img/products/" . $this->getidproduct() . ".jpg";
 
 		} else {
 
-			$url = "/resource/templates/store/img/product.jpg";
+			$url = "/resource/img/products/product.jpg";
 
 		}
 
@@ -113,7 +112,7 @@ class Product extends Model {
 
 	public function setPhoto($file)
 	{
-
+		//Convertendo formato imagem
 		$extension = explode('.', $file['name']);
 		$extension = end($extension);
 
@@ -122,30 +121,54 @@ class Product extends Model {
 			case "jpeg":
 			$image = imagecreatefromjpeg($file["tmp_name"]);
 			break;
-			
+
 			case "gif":
 			$image = imagecreatefromgif($file["tmp_name"]);
 			break;
 
 			case "png":
-			$image = imagecreatefrompng($file["tmp_name"]);	
+			$image = imagecreatefrompng($file["tmp_name"]);
 			break;
-
 		}
-
+		//Definindo o caminho onde a imgem será salva
 		$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
 			"resource" . DIRECTORY_SEPARATOR . 
-			"upload" . DIRECTORY_SEPARATOR .
-			"products" . DIRECTORY_SEPARATOR .
 			"img" . DIRECTORY_SEPARATOR .
+			"products" . DIRECTORY_SEPARATOR .
 			$this->getidproduct() . ".jpg";
-
+		//Definindo o formato da imagem
 		imagejpeg($image, $dist);
 
 		imagedestroy($image);
 
 		$this->checkPhoto();
 
+	}
+
+	public function getFromURL($desurl)
+	{
+
+		$sql = new Sql();
+
+		$rows = $sql->select("SELECT * FROM tb_products WHERE desurl = :desurl LIMIT 1", [
+			':desurl'=>$desurl
+		]);
+
+		$this->setData($rows[0]);
+	}
+
+	public function getCategories()
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("
+			SELECT * FROM tb_categories a INNER JOIN tb_categoriesproducts b ON a.idcategory = b.idcategory WHERE b.idproduct = :idproduct
+			", [
+
+				':idproduct'=>$this->getidproduct()
+			]);
+		
 	}
 
 }
