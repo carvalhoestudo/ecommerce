@@ -20,10 +20,9 @@ class Sql {
 			Sql::PASSWORD
 		);
 
-<<<<<<< HEAD
+
 		$this->conn->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-=======
->>>>>>> 667deb804ded642634f2a9eba91a649e858a3300
+
 	}
 
 	private function setParams($statement, $parameters = array())
@@ -52,11 +51,7 @@ class Sql {
 		$stmt->execute();
 
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 667deb804ded642634f2a9eba91a649e858a3300
 	public function select($rawQuery, $params = array()):array
 	{
 
