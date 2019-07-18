@@ -13,13 +13,14 @@ class User extends Model {
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
 	const SUCCESS = "UserSucesss";
-	public static function getFromSession()
 
+	public static function getFromSession()
 	{
 
 		$user = new User();
 
 		if (isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['iduser'] > 0) {
+
 			$user->setData($_SESSION[User::SESSION]);
 		}
 
@@ -28,6 +29,7 @@ class User extends Model {
 
 	public static function checkLogin($inadmin = true)
 	{
+
 		if (
 			!isset($_SESSION[User::SESSION])
 			||
@@ -41,7 +43,9 @@ class User extends Model {
 		} else {
 
 			if ($inadmin === true && (bool)$_SESSION[User::SESSION]['inadmin'] === true) {
+
 				return true;
+				
 			} else if ($inadmin === false) {
 
 				return true;
@@ -49,7 +53,6 @@ class User extends Model {
 			} else {
 
 				return false;
-
 			}
 		}
 	}
