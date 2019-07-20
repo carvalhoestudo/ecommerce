@@ -47,6 +47,7 @@ $app->get('/admin/forgot', function(){
 	$page = new PageAdmin([
 		"header"=>false,
 		"footer"=>false
+
 	]);
 
 	$page->setTpl("forgot");
@@ -109,7 +110,6 @@ $app->post("/admin/forgot/reset", function(){
 		"header"=>false,
 		"footer"=>false
 	]);
-
+	
 	$page->setTpl("forgot-reset-success");	
-
 });
