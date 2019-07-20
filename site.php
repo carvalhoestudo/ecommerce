@@ -8,7 +8,7 @@ use \Hcode\Model\Cart;
 $app->get('/', function() {
 
 	$products = Product::listAll();
-    
+
 	$page = new Page();
 
 	$page->setTpl("index", [
@@ -27,13 +27,13 @@ $app->get("/categories/:idcategory", function($idcategory){
 
 	$pagination = $category->getProductsPage($page);
 
-	$pages =[];
-	for ($i=1; $i <= $pagination['pages']; $i++) {
+	$pages = [];
+
+	for ($i=1; $i <= $pagination['pages']; $i++) { 
 		array_push($pages, [
 			'link'=>'/categories/'.$category->getidcategory().'?page='.$i,
 			'page'=>$i
 		]);
-
 	}
 
 	$page = new Page();
@@ -46,7 +46,7 @@ $app->get("/categories/:idcategory", function($idcategory){
 
 });
 
-$app->get("/products/:desurl", function($desurl) {
+$app->get("/products/:desurl", function($desurl){
 
 	$product = new Product();
 
@@ -67,14 +67,10 @@ $app->get("/cart", function(){
 
 	$page = new Page();
 
-	$page->setTpl("cart", [
-		'cart'=>$cart->getValues(),
-		'products'=>$cart->getProducts()
-		//'error'=>Cart::getMsgError()
-	]);
+	$page->setTpl("cart");
 
 });
-
+/*
 $app->get("/cart/:idproduct/add", function($idproduct){
 
 	$product = new Product();
@@ -84,12 +80,10 @@ $app->get("/cart/:idproduct/add", function($idproduct){
 	$cart = Cart::getFromSession();
 
 	$qtd = (isset($_GET['qtd'])) ? (int)$_GET['qtd'] : 1;
-
-		for ($i = 0; $i < $qtd; $i++) {
-
-			$cart->addProduct($product);
-
-		}
+	for ($i = 0; $i < $qtd; $i++) {
+		
+		$cart->addProduct($product);
+	}
 
 	header("Location: /cart");
 	exit;
@@ -124,4 +118,4 @@ $app->get("/cart/:idproduct/remove", function($idproduct){
 	header("Location: /cart");
 	exit;
 
-});
+});*/
