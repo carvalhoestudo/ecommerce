@@ -60,9 +60,8 @@ class Product extends Model {
 		$results = $sql->select("SELECT * FROM tb_products WHERE idproduct = :idproduct", [
 			':idproduct'=>$idproduct
 		]);
-
+		
 		$this->setData($results[0]);
-
 	}
 
 	public function delete()

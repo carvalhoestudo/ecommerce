@@ -88,8 +88,10 @@ class Cart extends Model {
 
 	}
 
+	
 	public function save()
 	{
+
 		$sql = new Sql();
 
 		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :deszipcode, :vlfreight, :nrdays)", [
@@ -102,7 +104,6 @@ class Cart extends Model {
 		]);
 
 		$this->setData($results[0]);
-
 	}
 
 	public function addProduct(Product $product)

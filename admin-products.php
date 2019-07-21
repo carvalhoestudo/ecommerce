@@ -36,8 +36,6 @@ $app->post("/admin/products/create", function(){
 
 	$product->setData($_POST);
 
-	$product->get((int)$idproduct);
-
 	$product->save();
 
 	header("Location: /admin/products");
