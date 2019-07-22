@@ -144,16 +144,100 @@ $app->get("/checkout", function(){
 
 	User::verifyLogin(false);
 
+	$address = new Address();
 	$cart = Cart::getFromSession();
 
-	$address = new Address();
+	if (!isset($_GET['zipcode'])) {
+
+		$_GET['zipcode'] = $cart->getdeszipcode();
+
+	}
+
+	if (isset($_GET['zipcode'])) {
+
+		$address->loadFromCEP($_GET['zipcode']);
+
+		$cart->setdeszipcode($_GET['zipcode']);
+
+		$cart->save();
+
+		$cart->getCalculateTotal();
+
+	}
+
+	if (!$address->getdesaddress()) $address->setdesaddress('');
+	if (!$address->getdesnumber()) $address->setdesnumber('');
+	if (!$address->getdescomplement()) $address->setdescomplement('');
+	if (!$address->getdesdistrict()) $address->setdesdistrict('');
+	if (!$address->getdescity()) $address->setdescity('');
+	if (!$address->getdesstate()) $address->setdesstate('');
+	if (!$address->getdescountry()) $address->setdescountry('');
+	if (!$address->getdeszipcode()) $address->setdeszipcode('');
 
 	$page = new Page();
 
 	$page->setTpl("checkout", [
 		'cart'=>$cart->getValues(),
-		'address'=>$address->getValues()
+		'address'=>$address->getValues(),
+		'products'=>$cart->getProducts(),
+		'error'=>Address::getMsgError()
 	]);
+
+});
+
+$app->post("/checkout", function(){
+
+	User::verifyLogin(false);
+
+	if (!isset($_POST['zipcode']) || $_POST['zipcode'] === '') {
+		Address::setMsgError("Informe um CEP Válido.");
+		header('Location: /checkout');
+		exit;
+	}
+
+	if (!isset($_POST['desaddress']) || $_POST['desaddress'] === '') {
+		Address::setMsgError("Informe um endereço Válido.");
+		header('Location: /checkout');
+		exit;
+	}
+
+	if (!isset($_POST['desdistrict']) || $_POST['desdistrict'] === '') {
+		Address::setMsgError("Informe um bairro Válido.");
+		header('Location: /checkout');
+		exit;
+	}
+
+	if (!isset($_POST['descity']) || $_POST['zipcode'] === '') {
+		Address::setMsgError("Informe uma cidade Válida.");
+		header('Location: /checkout');
+		exit;
+	}
+
+	if (!isset($_POST['desstate']) || $_POST['desstate'] === '') {
+		Address::setMsgError("Informe um estado Válido.");
+		header('Location: /checkout');
+		exit;
+	}
+
+	if (!isset($_POST['descountry']) || $_POST['descountry'] === '') {
+		Address::setMsgError("Informe um Pais Válido.");
+		header('Location: /checkout');
+		exit;
+	}
+
+	$user = User::getFromSession();
+
+	$address = new Address();
+
+	$_POST['deszipcode'] = $_POST['zipcode'];
+	$_POST['idperson'] = $user->getidperson();
+
+	$address->setData($_POST);
+
+	$address->save();
+
+	header("Location: /order");
+	exit;
 
 });
 
@@ -307,6 +391,7 @@ $app->post("/forgot/reset", function(){
 	$page = new Page();
 	
 	$page->setTpl("forgot-reset-success");	
+
 });
 
 $app->get("/profile", function(){
