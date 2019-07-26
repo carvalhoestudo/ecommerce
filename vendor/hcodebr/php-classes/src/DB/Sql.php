@@ -1,4 +1,5 @@
 <?php 
+
 namespace Hcode\DB;
 
 class Sql {
@@ -18,6 +19,7 @@ class Sql {
 			"mysql:dbname=".Sql::DBNAME.";host=".Sql::HOSTNAME, 
 			Sql::USERNAME,
 			Sql::PASSWORD
+
 		);
 
 
