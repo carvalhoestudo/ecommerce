@@ -6,20 +6,20 @@ use Rain\Tpl;
 
 class Page {
 
-	private $tpl;
-	private $options = [];
+	private $tpl;//site template route
+	private $options = [];//site template route
 	private $defaults = [
-		"header"=>true,
-		"footer"=>true,
+		"header"=>true,//site template route
+		"footer"=>true,//site template route
 		"data"=>[]
 	];
-
-	public function __construct($opts = array()){
+	//Configuring site template route
+	public function __construct($opts = array(), $tpl_dir = "/views/"){
 
 		$this->options = array_merge($this->defaults, $opts);
 
 		$config = array(
-		    "tpl_dir"       => $_SERVER['DOCUMENT_ROOT']."/views/",
+		    "tpl_dir"       => $_SERVER['DOCUMENT_ROOT'].$tpl_dir,
 		    "cache_dir"     => $_SERVER['DOCUMENT_ROOT']."/views-cache/",
 		    "debug"         => false
 		);
@@ -57,7 +57,8 @@ class Page {
 
 		if ($this->options['footer'] === true) $this->tpl->draw("footer", false);
 
-	}
+	}//End site template route
+	
 
 }
 
