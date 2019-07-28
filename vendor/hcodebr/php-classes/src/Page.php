@@ -6,11 +6,11 @@ use Rain\Tpl;
 
 class Page {
 
-	private $tpl;//site template route
-	private $options = [];//site template route
+	private $tpl;
+	private $options = [];
 	private $defaults = [
-		"header"=>true,//site template route
-		"footer"=>true,//site template route
+		"header"=>true,
+		"footer"=>true,
 		"data"=>[]
 	];
 	//Configuring site template route
